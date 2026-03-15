@@ -2,27 +2,32 @@ import React, { useState, useEffect } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import './themes.css';
 
-// Add your NewsAPI.org API key here
-const API_KEY = 'e806ff3eacdd4878ba7e2134c5c0d000';
+const API_KEY = 'pub_bd6633b6cba7448fbaa645c7680b96b7';
 
 function App() {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [page, setPage] = useState(1);
+  const [nextPage, setNextPage] = useState(null);
   const [hasMore, setHasMore] = useState(true);
   const [theme, setTheme] = useState('dark');
 
   const fetchMoreData = async () => {
+    let url = `https://newsdata.io/api/1/news?apikey=${API_KEY}&language=en`;
+    if (nextPage) {
+      url += `&page=${nextPage}`;
+    }
+
     try {
-      const response = await fetch(`https://newsapi.org/v2/top-headlines?country=us&apiKey=${API_KEY}&page=${page}`);
+      const response = await fetch(url);
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
       const data = await response.json();
-      setArticles(articles.concat(data.articles));
-      setPage(page + 1);
-      if (data.articles.length === 0 || data.totalResults === articles.length) {
+      setArticles(articles.concat(data.results));
+      if (data.nextPage) {
+        setNextPage(data.nextPage);
+      } else {
         setHasMore(false);
       }
     } catch (error) {
@@ -32,9 +37,7 @@ function App() {
   };
 
   useEffect(() => {
-    if (API_KEY !== 'YOUR_NEWS_API_KEY') {
-      fetchMoreData();
-    }
+    fetchMoreData();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -55,9 +58,7 @@ function App() {
         </button>
       </header>
       <main>
-        {API_KEY === 'YOUR_NEWS_API_KEY' ? (
-          <p>Please add your NewsAPI.org API key to App.js</p>
-        ) : loading ? (
+        {loading ? (
           <p>Loading...</p>
         ) : error ? (
           <p>Error: {error.message}</p>
@@ -76,10 +77,10 @@ function App() {
             <div className="news-grid">
               {articles.map((article, index) => (
                 <div key={index} className="news-card">
-                  {article.urlToImage && <img src={article.urlToImage} alt={article.title} />}
+                  {article.image_url && <img src={article.image_url} alt={article.title} />}
                   <h2>{article.title}</h2>
                   <p>{article.description}</p>
-                  <a href={article.url} target="_blank" rel="noopener noreferrer">Read more</a>
+                  <a href={article.link} target="_blank" rel="noopener noreferrer">Read more</a>
                 </div>
               ))}
             </div>
