@@ -1,0 +1,223 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+/* Common styles */
+.App {
+  text-align: center;
+}
+
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .news-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* Dark Theme */
+.theme-dark body {
+  background-color: #0a0a1a;
+  color: #e0e0e0;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.theme-dark .App-header {
+  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+  padding: 2rem;
+  color: #61dafb;
+  box-shadow: 0 0 20px rgba(97, 218, 251, 0.5);
+  text-shadow: 0 0 10px #61dafb;
+  border-bottom: 1px solid #61dafb;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.theme-dark .App-header h1 {
+  font-size: 3rem;
+  letter-spacing: 0.2rem;
+  margin: 0;
+}
+
+.theme-dark .news-card {
+  background: rgba(10, 25, 47, 0.8);
+  border: 1px solid #61dafb;
+  border-radius: 10px;
+  padding: 1.5rem;
+  text-align: left;
+  box-shadow: 0 0 15px rgba(97, 218, 251, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+}
+
+.theme-dark .news-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 0 25px rgba(97, 218, 251, 0.7);
+}
+
+.theme-dark .news-card img {
+  max-width: 100%;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  opacity: 0.9;
+}
+
+.theme-dark .news-card h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: #61dafb;
+}
+
+.theme-dark .news-card p {
+  font-size: 1rem;
+  flex-grow: 1;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+  color: #e0e0e0;
+}
+
+.theme-dark .news-card a {
+  color: #61dafb;
+  text-decoration: none;
+  font-weight: bold;
+  align-self: flex-end;
+  border: 1px solid #61dafb;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.theme-dark .news-card a:hover {
+  background-color: #61dafb;
+  color: #0a0a1a;
+}
+
+.theme-dark .theme-toggle {
+    background-color: #61dafb;
+    color: #0a0a1a;
+    border: 1px solid #61dafb;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    font-family: 'Orbitron', sans-serif;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.theme-dark .theme-toggle:hover {
+    background-color: #0a0a1a;
+    color: #61dafb;
+}
+
+.theme-dark p {
+    font-size: 1.2rem;
+    color: #61dafb;
+}
+
+/* Light Theme */
+.theme-light body {
+  background-color: #f0f2f5;
+  color: #333;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.theme-light .App-header {
+  background-color: #ffffff;
+  padding: 2rem;
+  color: #333;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.theme-light .App-header h1 {
+  font-size: 2.5rem;
+  margin: 0;
+}
+
+.theme-light .news-card {
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-align: left;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.theme-light .news-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.theme-light .news-card img {
+  max-width: 100%;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+}
+
+.theme-light .news-card h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.theme-light .news-card p {
+  font-size: 1rem;
+  flex-grow: 1;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+  color: #555;
+}
+
+.theme-light .news-card a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+  align-self: flex-end;
+}
+
+.theme-light .news-card a:hover {
+  text-decoration: underline;
+}
+
+.theme-light .theme-toggle {
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #333;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.theme-light .theme-toggle:hover {
+    background-color: #fff;
+    color: #333;
+}
+
+.theme-light p {
+    font-size: 1.2rem;
+    color: #333;
+}
